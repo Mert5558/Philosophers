@@ -1,0 +1,66 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/05/09 12:36:37 by merdal            #+#    #+#             */
+/*   Updated: 2024/05/16 15:56:13 by merdal           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philo.h"
+
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	result;
+	int	neg;
+
+	i = 0;
+	neg = 1;
+	result = 0;
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
+		||str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
+		i++;
+	if (str[i] == '-' || str[i] == '+')
+	{
+		if (str[i] == '-')
+			neg = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = (result * 10) + (str[i] - '0');
+		i++;
+	}
+	return (result * neg);
+}
+
+void	ft_usleep(size_t time)
+{
+	size_t	start;
+
+	start = ft_get_time();
+	while (ft_get_time() - start < time)
+		usleep(100);
+}
+
+size_t	ft_get_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	ft_print_status(t_philo *philo, char *status)
+{
+	size_t	time;
+
+	pthread_mutex_lock(philo->write_lock);
+	time = ft_get_time() - philo->start_time;
+	printf("%zu %d %s\n", time, philo->id, status);
+	pthread_mutex_unlock(philo->write_lock);
+}

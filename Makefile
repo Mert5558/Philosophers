@@ -6,7 +6,7 @@
 #    By: merdal <merdal@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/09 12:54:09 by merdal            #+#    #+#              #
-#    Updated: 2024/05/13 14:16:01 by merdal           ###   ########.fr        #
+#    Updated: 2024/05/14 12:40:19 by merdal           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ SRCS =	philo.c \
 		ft_check_args.c \
 		ft_threads.c \
 		ft_routine.c \
+		ft_calloc.c \
 
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
