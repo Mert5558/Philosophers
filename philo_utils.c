@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:36:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/16 15:56:13 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/20 13:25:32 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,14 @@ int	ft_atoi(const char *str)
 	return (result * neg);
 }
 
-void	ft_usleep(size_t time)
+int	ft_usleep(size_t milliseconds)
 {
 	size_t	start;
 
 	start = ft_get_time();
-	while (ft_get_time() - start < time)
-		usleep(100);
+	while ((ft_get_time() - start) < milliseconds)
+		usleep(1000);
+	return (0);
 }
 
 size_t	ft_get_time(void)

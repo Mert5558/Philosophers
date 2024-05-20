@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:59 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/13 14:14:45 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/20 15:50:27 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,41 +23,42 @@ typedef struct s_philo
 {
 	pthread_t		thread;
 	int				id;
-	int				eating;
+	int				is_eating;
 	int				meals_eaten;
 	size_t			last_meal;
 	size_t			time_to_die;
 	size_t			time_to_eat;
 	size_t			time_to_sleep;
+	size_t			meal_amount;
 	size_t			start_time;
-	int				*is_dead;
-	pthread_mutex_t	*r_fork;
-	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*dead_lock;
 	pthread_mutex_t	*meal_lock;
+	pthread_mutex_t	*r_fork;
+	pthread_mutex_t	*l_fork;
 }					t_philo;
 
 typedef struct s_program
 {
-	int				dead_flag;
-	int				num_of_philos;
-	int				num_times_to_eat;
+	int				dead_philo;
+	int				philo_num;
+	pthread_mutex_t	write_lock;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
-	pthread_mutex_t	write_lock;
-	t_philo			*philos;
+	t_philo			*philo;
 }					t_program;
 
 int		ft_check_args(int argc, char **argv);
 void	ft_init(t_philo *philos, t_program *program, char **argv);
 //void	*ft_supervisor(void *pointer);
 void	*ft_routine(void *pointer);
-void	ft_threads(t_philo *philos, t_program *program);
+void	ft_threads(t_philo *philos, char **argv);
 
 // utils
 int		ft_atoi(const char *str);
 size_t	ft_get_time(void);
-void	ft_usleep(size_t time);
+int		ft_usleep(size_t milliseconds);
+void	ft_print_status(t_philo *philo, char *status);
+void	*ft_calloc(size_t n_items, size_t size);
 
 # endif
