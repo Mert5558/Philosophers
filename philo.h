@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:59 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/20 15:50:27 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/21 15:44:31 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_philo
 	int				id;
 	int				is_eating;
 	int				meals_eaten;
+	int				dead_philo;
 	size_t			last_meal;
 	size_t			time_to_die;
 	size_t			time_to_eat;
@@ -40,7 +41,6 @@ typedef struct s_philo
 
 typedef struct s_program
 {
-	int				dead_philo;
 	int				philo_num;
 	pthread_mutex_t	write_lock;
 	pthread_mutex_t	dead_lock;
@@ -49,10 +49,10 @@ typedef struct s_program
 }					t_program;
 
 int		ft_check_args(int argc, char **argv);
-void	ft_init(t_philo *philos, t_program *program, char **argv);
-//void	*ft_supervisor(void *pointer);
+void	ft_init(t_philo *philo, t_program *program, pthread_mutex_t	*forks, char **argv);
+void	*ft_supervisor(void *pointer);
 void	*ft_routine(void *pointer);
-void	ft_threads(t_philo *philos, char **argv);
+void	ft_threads(t_philo *philos, t_program *program);
 
 // utils
 int		ft_atoi(const char *str);

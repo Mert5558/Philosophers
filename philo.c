@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/20 16:32:02 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/21 15:47:08 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	main(int argc, char **argv)
 {
 	t_philo			*philo;
 	t_program		*program;
+	pthread_mutex_t	forks[200];
 	
 	philo = ft_calloc(1, sizeof(t_philo));     // verbessern
 	program = ft_calloc(1, sizeof(t_program)); // verbessern
@@ -27,6 +28,7 @@ int	main(int argc, char **argv)
 	}
 	if (ft_check_args(argc, argv) != 0)
 		return (1);
-	ft_init(philo, program, argv);
+	ft_init(philo, program, forks, argv);
+	ft_threads(philo, program);
 	return (0);
 }
