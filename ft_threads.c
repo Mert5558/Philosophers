@@ -6,21 +6,39 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:26:25 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/17 16:36:46 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/21 16:53:10 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	ft_threads(t_philo *philos, char **argv)
+void	ft_threads(t_philo *philo, t_program *program)
 {
+	pthread_t	supervisor;
+	int sup;
 	int i;
 
-	i = 0;
-	while (i < ft_atoi(argv[1]))
+	sup = pthread_create(&supervisor, NULL, ft_supervisor, (void *)philo);
+	if (sup == 1)
 	{
-		//printf("creating thread %d\n", i);
-		pthread_create(&philos[i].thread, NULL, ft_routine, &philos[i]);
+		printf("Error: supervisor not created\n");
+		return ;
+	}
+	printf("supervisor created\n");
+	i = 0;
+	while (i < 4)
+	{
+		pthread_create(&philo[i].thread, NULL, ft_routine, &philo[i]);
+		printf("nabaysun loo\n");
+		usleep(100);
+		i++;
+	}
+	printf("philo created\n");
+	pthread_join(supervisor, NULL);
+	i = 0;
+	while (i < program->philo_num)
+	{
+		pthread_join(philo[i].thread, NULL);
 		i++;
 	}
 }
