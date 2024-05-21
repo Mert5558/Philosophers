@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:56:26 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/20 15:57:20 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/21 15:44:21 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_init_philo(t_philo *philo, t_program *program, pthread_mutex_t *forks, c
 
 void	ft_init_program(t_program *program, t_philo *philo,int philo_num)
 {
-	program->dead_philo = 0;
+	philo->dead_philo = 0;
 	program->philo_num = philo_num;
 	program->philo = philo;
 	pthread_mutex_init(&program->write_lock, NULL);
@@ -65,9 +65,8 @@ void	ft_init_program(t_program *program, t_philo *philo,int philo_num)
 	pthread_mutex_init(&program->meal_lock, NULL);
 }
 
-void	ft_init(t_philo *philo, t_program *program, char **argv)
+void	ft_init(t_philo *philo, t_program *program, pthread_mutex_t	*forks, char **argv)
 {
-	pthread_mutex_t	forks[200];
 	ft_init_program(program, philo, ft_atoi(argv[1]));
 	ft_init_philo(philo, program, forks, argv);
 	ft_init_forks(forks, program->philo_num);
