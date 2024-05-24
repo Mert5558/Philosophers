@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/21 15:47:08 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/24 15:57:35 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	main(int argc, char **argv)
 	t_program		*program;
 	pthread_mutex_t	forks[200];
 	
-	philo = ft_calloc(1, sizeof(t_philo));     // verbessern
-	program = ft_calloc(1, sizeof(t_program)); // verbessern
+	philo = ft_calloc(ft_atoi(argv[1]), sizeof(t_philo));
+	program = ft_calloc(1, sizeof(t_program));
 	if (argc != 5 && argc != 6)
 	{
 		write(1, "Error: Wrong number of arguments\n", 33);
