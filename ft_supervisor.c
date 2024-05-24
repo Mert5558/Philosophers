@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:42:00 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/21 13:34:40 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/24 15:51:52 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_dead_philo(t_philo *philo)
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		pthread_mutex_lock(philo->dead_lock);
-		ft_print_status(philo, "died");
+		ft_print_status(philo, "died");                         // aktualisieren
 		philo->dead_philo = 1;
 		pthread_mutex_unlock(philo->dead_lock);
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:56:26 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/21 15:44:21 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/24 15:40:50 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	ft_init_philo(t_philo *philo, t_program *program, pthread_mutex_t *forks, c
 		philo[i].id = i + 1;
 		philo[i].is_eating = 0;
 		philo[i].meals_eaten = 0;
-		philo->time_to_die = ft_atoi(argv[2]);
-		philo->time_to_eat = ft_atoi(argv[3]);
-		philo->time_to_sleep = ft_atoi(argv[4]);
+		philo[i].time_to_die = ft_atoi(argv[2]);
+		philo[i].time_to_eat = ft_atoi(argv[3]);
+		philo[i].time_to_sleep = ft_atoi(argv[4]);
 		if (argv[5])
 			philo->meal_amount = ft_atoi(argv[5]);
 		else

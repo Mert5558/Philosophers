@@ -6,44 +6,42 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:57:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/21 16:15:36 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/24 15:44:50 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// void	think(t_philo *philo)
-// {
-// 	ft_print_status(philo, "is thinking");
-// }
+void	ft_think(t_philo *philo)
+{
+	ft_print_status(philo, "is thinking");
+}
 
-// // Dream routine funtion
+void	ft_sleep(t_philo *philo)
+{
+	ft_print_status(philo, "is sleeping");
+	ft_usleep(philo->time_to_sleep);
+}
 
-// void	dream(t_philo *philo)
-// {
-// 	ft_print_status(philo, "is sleeping");
-// 	ft_usleep(philo->time_to_sleep);
-// }
-
-// // Eat routine funtion
-
-// void	eat(t_philo *philo)
-// {
-// 	pthread_mutex_lock(philo->r_fork);
-// 	ft_print_status(philo, "has taken a fork");
-// 	pthread_mutex_lock(philo->l_fork);
-// 	ft_print_status(philo, "has taken a fork");
-// 	philo->is_eating = 1;
-// 	ft_print_status(philo, "is eating");
-// 	pthread_mutex_lock(philo->meal_lock);
-// 	philo->last_meal = ft_get_time();
-// 	philo->meals_eaten++;
-// 	pthread_mutex_unlock(philo->meal_lock);
-// 	ft_usleep(philo->time_to_eat);
-// 	philo->is_eating = 0;
-// 	pthread_mutex_unlock(philo->l_fork);
-// 	pthread_mutex_unlock(philo->r_fork);
-// }
+void	ft_eat(t_philo *philo)
+{
+	pthread_mutex_lock(philo->r_fork);
+	ft_print_status(philo, "has taken right fork");
+	pthread_mutex_lock(philo->l_fork);
+	ft_print_status(philo, "has taken left fork");      // eigene funktion
+	philo->is_eating = 1;
+	ft_print_status(philo, "is eating");
+	pthread_mutex_lock(philo->meal_lock);
+	philo->last_meal = ft_get_time();
+	philo->meals_eaten++;
+	pthread_mutex_unlock(philo->meal_lock);
+	ft_usleep(philo->time_to_eat);                   // nach sleep philo[3] stuck; data race time_to_eat, time_to_eat ist nicht bei jedem philo gleich
+	philo->is_eating = 0;
+	pthread_mutex_unlock(philo->l_fork);
+	ft_print_status(philo, "has put left fork");
+	pthread_mutex_unlock(philo->r_fork);
+	ft_print_status(philo, "has put right fork");
+}
 
 int	ft_check_dead(t_philo *philo)
 {
@@ -66,10 +64,9 @@ void	*ft_routine(void *pointer)
 		ft_usleep(1);
 	while (ft_check_dead(philo) != 1)
 	{
-		ft_usleep(100);
-		pthread_mutex_lock(philo->dead_lock);
-		philo->dead_philo = 1;
-		pthread_mutex_unlock(philo->dead_lock);
+		ft_eat(philo);        // if () für 1 philo
+		ft_sleep(philo);
+		ft_think(philo);
 	}
 	return (pointer);
 }
