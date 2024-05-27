@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:26:25 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/24 12:01:46 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/27 13:53:57 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_threads(t_philo *philo, t_program *program)
 	}
 	//printf("supervisor created\n");
 	i = 0;
-	while (i < 4)
+	while (i < program->philo_num)
 	{
 		pthread_create(&philo[i].thread, NULL, ft_routine, &philo[i]);
 		//printf("nabaysun loo\n");

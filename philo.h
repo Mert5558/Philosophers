@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:59 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/24 14:18:35 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/27 13:07:14 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ typedef struct s_philo
 	pthread_t		thread;
 	int				id;
 	int				is_eating;
-	int				meals_eaten;
 	int				dead_philo;
+	int				philo_num;
+	size_t			meals_eaten;
 	size_t			last_meal;
 	size_t			time_to_die;
 	size_t			time_to_eat;

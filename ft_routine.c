@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:57:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/24 15:44:50 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/27 15:18:50 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ void	ft_eat(t_philo *philo)
 	philo->last_meal = ft_get_time();
 	philo->meals_eaten++;
 	pthread_mutex_unlock(philo->meal_lock);
-	ft_usleep(philo->time_to_eat);                   // nach sleep philo[3] stuck; data race time_to_eat, time_to_eat ist nicht bei jedem philo gleich
+	ft_usleep(philo->time_to_eat);
 	philo->is_eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
-	ft_print_status(philo, "has put left fork");
+	//ft_print_status(philo, "has put left fork");
 	pthread_mutex_unlock(philo->r_fork);
-	ft_print_status(philo, "has put right fork");
+	//ft_print_status(philo, "has put right fork");
 }
 
 int	ft_check_dead(t_philo *philo)
