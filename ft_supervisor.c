@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:42:00 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/27 15:19:39 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/30 13:07:28 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,14 @@ int	ft_check_meals(t_philo *philo)
 	}
 	if (how_many_ate >= meal_amount)
 	{
-		philo->dead_philo = 1;
-		return (1);
+    	i = 0;
+		while (i < philo[0].philo_num)
+		{
+			philo[i].dead_philo = 1;
+			i++;
+		}
+    	printf("yeeeeeeeedddddiiiiiiimmmmmmmm\n");
+    	return (1);
 	}
 	return (0);
 }
