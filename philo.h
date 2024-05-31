@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:59 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/27 13:07:14 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:20:48 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	ft_init(t_philo *philo, t_program *program, pthread_mutex_t	*forks, char **
 void	*ft_supervisor(void *pointer);
 void	*ft_routine(void *pointer);
 void	ft_threads(t_philo *philos, t_program *program);
+int		ft_check_dead_philo(t_philo *philo);
+int		ft_check_meals(t_philo *philo);
 
 // utils
 int		ft_atoi(const char *str);

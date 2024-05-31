@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:57:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/27 15:18:50 by merdal           ###   ########.fr       */
+/*   Updated: 2024/05/31 15:43:57 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	ft_think(t_philo *philo)
 {
 	ft_print_status(philo, "is thinking");
+	if (philo->philo_num % 2 != 0)
+		ft_usleep(philo->time_to_die - philo->time_to_eat - philo->time_to_sleep);
 }
 
 void	ft_sleep(t_philo *philo)
@@ -26,9 +28,9 @@ void	ft_sleep(t_philo *philo)
 void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
-	ft_print_status(philo, "has taken right fork");
+	ft_print_status(philo, "has taken a fork");
 	pthread_mutex_lock(philo->l_fork);
-	ft_print_status(philo, "has taken left fork");      // eigene funktion
+	ft_print_status(philo, "has taken a fork");      // eigene funktion
 	philo->is_eating = 1;
 	ft_print_status(philo, "is eating");
 	pthread_mutex_lock(philo->meal_lock);
@@ -38,9 +40,7 @@ void	ft_eat(t_philo *philo)
 	ft_usleep(philo->time_to_eat);
 	philo->is_eating = 0;
 	pthread_mutex_unlock(philo->l_fork);
-	//ft_print_status(philo, "has put left fork");
 	pthread_mutex_unlock(philo->r_fork);
-	//ft_print_status(philo, "has put right fork");
 }
 
 int	ft_check_dead(t_philo *philo)
@@ -64,9 +64,26 @@ void	*ft_routine(void *pointer)
 		ft_usleep(1);
 	while (ft_check_dead(philo) != 1)
 	{
-		ft_eat(philo);        // if () für 1 philo
-		ft_sleep(philo);
-		ft_think(philo);
+		if (ft_check_dead_philo(philo) == 1 || ft_check_meals(philo) == 1)
+			break ;
+		
+		
+		if (ft_check_dead(philo) == 1)
+			break ;
+		else
+			ft_eat(philo);
+
+
+		if (ft_check_dead(philo) == 1)
+			break ;
+		else
+			ft_think(philo);
+
+
+		if (ft_check_dead(philo) == 1)
+			break ;
+		else
+			ft_sleep(philo);
 	}
 	return (pointer);
 }
