@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:42:00 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/31 14:48:36 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/07 13:00:28 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	ft_check_dead_philo(t_philo *philo)
 	i = 0;
 	time = ft_get_time() - philo->last_meal;
 	pthread_mutex_lock(philo->meal_lock);
-	if (time >= philo->time_to_die && philo->is_eating == 0)
+	if (time >= philo->time_to_die && philo->is_eating == 0)  // nicht ende eat sondern anfang eat rechnen
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		pthread_mutex_lock(philo->dead_lock);

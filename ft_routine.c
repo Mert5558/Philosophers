@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:57:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/31 15:43:57 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/07 12:56:06 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_think(t_philo *philo)
 {
 	ft_print_status(philo, "is thinking");
 	if (philo->philo_num % 2 != 0)
-		ft_usleep(philo->time_to_die - philo->time_to_eat - philo->time_to_sleep);
+		ft_usleep(philo->time_to_sleep);
 }
 
 void	ft_sleep(t_philo *philo)
@@ -62,23 +62,17 @@ void	*ft_routine(void *pointer)
 	philo = (t_philo *)pointer;
 	if (philo->id % 2 == 0)
 		ft_usleep(1);
-	while (ft_check_dead(philo) != 1)
+	while (1)
 	{
-		if (ft_check_dead_philo(philo) == 1 || ft_check_meals(philo) == 1)
-			break ;
-		
-		
 		if (ft_check_dead(philo) == 1)
 			break ;
 		else
 			ft_eat(philo);
 
-
 		if (ft_check_dead(philo) == 1)
 			break ;
 		else
 			ft_think(philo);
-
 
 		if (ft_check_dead(philo) == 1)
 			break ;
