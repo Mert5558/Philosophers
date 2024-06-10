@@ -6,13 +6,11 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/31 14:17:40 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/10 11:57:28 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-//i started this project before finishing the 3rd circle. But i just realized now i could use my own git hub and later remote it to the git repo of the Project, so that i have all git commits also on the projects repo
 
 int	main(int argc, char **argv)
 {
