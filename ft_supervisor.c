@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:42:00 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/07 13:00:28 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/10 14:45:49 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	ft_check_meals(t_philo *philo)
 			philo[i].dead_philo = 1;
 			i++;
 		}
-    	printf("yeeeeeeeedddddiiiiiiimmmmmmmm\n");
     	return (1);
 	}
 	return (0);
@@ -51,11 +50,11 @@ int	ft_check_dead_philo(t_philo *philo)
 	i = 0;
 	time = ft_get_time() - philo->last_meal;
 	pthread_mutex_lock(philo->meal_lock);
-	if (time >= philo->time_to_die && philo->is_eating == 0)  // nicht ende eat sondern anfang eat rechnen
+	if (time >= philo->time_to_die && philo->is_eating == 0)
 	{
 		pthread_mutex_unlock(philo->meal_lock);
 		pthread_mutex_lock(philo->dead_lock);
-		ft_print_status(philo, "died");                         // aktualisieren
+		ft_print_status(philo, "died");
 		while (i < philo->philo_num)
 		{
 			philo[i].dead_philo = 1;
