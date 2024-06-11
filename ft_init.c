@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:56:26 by merdal            #+#    #+#             */
-/*   Updated: 2024/05/31 14:28:30 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/11 11:23:38 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,13 @@ void	ft_init_forks(pthread_mutex_t *forks, int philo_num)
 	}
 }
 
-void	ft_init_philo(t_philo *philo, t_program *program, pthread_mutex_t *forks, char **argv)
+void	ft_init_arg(t_philo *philo, t_program *program, char **argv)
 {
 	int	i;
 
 	i = 0;
 	while (i < program->philo_num)
 	{
-		philo[i].id = i + 1;
-		philo[i].is_eating = 0;
-		philo[i].meals_eaten = 0;
-		philo[i].dead_philo = 0;
 		philo[i].philo_num = ft_atoi(argv[1]);
 		philo[i].time_to_die = ft_atoi(argv[2]);
 		philo[i].time_to_eat = ft_atoi(argv[3]);
@@ -42,7 +38,23 @@ void	ft_init_philo(t_philo *philo, t_program *program, pthread_mutex_t *forks, c
 		if (argv[5])
 			philo[i].meal_amount = ft_atoi(argv[5]);
 		else
-			philo[i].meal_amount = - 1;
+			philo[i].meal_amount = -1;
+		i++;
+	}
+}
+
+void	ft_init_philo(t_philo *philo, t_program *program, pthread_mutex_t *forks, char **argv)
+{
+	int	i;
+
+	i = 0;
+	ft_init_arg(philo, program, argv);
+	while (i < program->philo_num)
+	{
+		philo[i].id = i + 1;
+		philo[i].is_eating = 0;
+		philo[i].meals_eaten = 0;
+		philo[i].dead_philo = 0;
 		philo[i].start_time = ft_get_time();
 		philo[i].last_meal = ft_get_time();
 		philo[i].write_lock = &program->write_lock;
@@ -57,7 +69,7 @@ void	ft_init_philo(t_philo *philo, t_program *program, pthread_mutex_t *forks, c
 	}
 }
 
-void	ft_init_program(t_program *program, t_philo *philo,int philo_num)
+void	ft_init_program(t_program *program, t_philo *philo, int philo_num)
 {
 	program->philo_num = philo_num;
 	program->philo = philo;

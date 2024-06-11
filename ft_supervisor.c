@@ -6,15 +6,28 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:42:00 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/10 14:45:49 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/11 12:50:16 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	ft_set_dead(t_philo *philo)
+{
+	int i;
+	
+	i = 0;
+	//ft_usleep(philo[0].time_to_sleep + 1);
+	while (i < philo[0].philo_num)
+	{
+		philo[i].dead_philo = 1;
+		i++;
+	}
+}
+
 int	ft_check_meals(t_philo *philo)
 {
-	int	i;
+	int		i;
 	int		how_many_ate;
 	size_t	meal_amount;
 
@@ -31,13 +44,9 @@ int	ft_check_meals(t_philo *philo)
 	}
 	if (how_many_ate == philo[0].philo_num)
 	{
-		i = 0;
-		while (i < philo[0].philo_num)
-		{
-			philo[i].dead_philo = 1;
-			i++;
-		}
-    	return (1);
+		//ft_usleep(philo->time_to_sleep);
+		ft_set_dead(philo);
+		return (1);
 	}
 	return (0);
 }
@@ -45,7 +54,7 @@ int	ft_check_meals(t_philo *philo)
 int	ft_check_dead_philo(t_philo *philo)
 {
 	size_t	time;
-	int i;
+	int		i;
 
 	i = 0;
 	time = ft_get_time() - philo->last_meal;
@@ -73,8 +82,8 @@ int	ft_check_dead_philo(t_philo *philo)
 
 void	*ft_supervisor(void *pointer)
 {
-	t_philo *philo;
-	
+	t_philo	*philo;
+
 	philo = (t_philo *)pointer;
 	while (1)
 	{

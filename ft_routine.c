@@ -6,23 +6,11 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:57:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/10 14:52:08 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/11 12:46:44 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	ft_check_dead(t_philo *philo)
-{
-	pthread_mutex_lock(philo->dead_lock);
-	if (philo->dead_philo == 1)
-	{
-		pthread_mutex_unlock(philo->dead_lock);
-		return (1);
-	}
-	pthread_mutex_unlock(philo->dead_lock);
-	return (0);
-}
 
 void	ft_think(t_philo *philo)
 {
@@ -37,12 +25,30 @@ void	ft_sleep(t_philo *philo)
 	ft_usleep(philo->time_to_sleep);
 }
 
+int	ft_check_dead(t_philo *philo)
+{
+	pthread_mutex_lock(philo->dead_lock);
+	if (philo->dead_philo == 1)
+	{
+		pthread_mutex_unlock(philo->dead_lock);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->dead_lock);
+	return (0);
+}
+
 void	ft_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	if (ft_check_dead(philo) == 1)
 		return ;
 	ft_print_status(philo, "has taken a fork");
+	if (philo->philo_num == 1)
+	{
+		ft_one_philo(philo);
+		if (ft_check_dead(philo) == 1)
+			return ;
+	}
 	pthread_mutex_lock(philo->l_fork);
 	ft_print_status(philo, "has taken a fork");
 	philo->is_eating = 1;

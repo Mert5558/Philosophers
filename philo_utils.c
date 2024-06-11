@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:36:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/03 13:28:38 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/11 11:26:55 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,11 @@ void	ft_print_status(t_philo *philo, char *status)
 	time = ft_get_time() - philo->start_time;
 	printf("%zu %d %s\n", time, philo->id, status);
 	pthread_mutex_unlock(philo->write_lock);
+}
+
+void	ft_one_philo(t_philo *philo)
+{
+	ft_usleep(philo->time_to_die);
+	pthread_mutex_unlock(philo->r_fork);
+	return ;
 }

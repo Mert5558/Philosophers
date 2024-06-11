@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/10 11:57:28 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/11 11:27:12 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	main(int argc, char **argv)
 	t_philo			*philo;
 	t_program		*program;
 	pthread_mutex_t	forks[200];
-	
+
 	philo = ft_calloc(ft_atoi(argv[1]), sizeof(t_philo));
 	program = ft_calloc(1, sizeof(t_program));
 	if (argc != 5 && argc != 6)
