@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/21 12:42:00 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/11 12:50:16 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/11 15:54:13 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	ft_set_dead(t_philo *philo)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
-	//ft_usleep(philo[0].time_to_sleep + 1);
 	while (i < philo[0].philo_num)
 	{
+		philo[i].all_ate = 1;
 		philo[i].dead_philo = 1;
 		i++;
 	}
@@ -44,7 +44,6 @@ int	ft_check_meals(t_philo *philo)
 	}
 	if (how_many_ate == philo[0].philo_num)
 	{
-		//ft_usleep(philo->time_to_sleep);
 		ft_set_dead(philo);
 		return (1);
 	}

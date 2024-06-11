@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 12:56:26 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/11 11:23:38 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/11 15:56:51 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ void	ft_init_arg(t_philo *philo, t_program *program, char **argv)
 	}
 }
 
-void	ft_init_philo(t_philo *philo, t_program *program, pthread_mutex_t *forks, char **argv)
+void	ft_init_philo(t_philo *philo, t_program *program,
+			pthread_mutex_t *forks, char **argv)
 {
 	int	i;
 
@@ -55,6 +56,7 @@ void	ft_init_philo(t_philo *philo, t_program *program, pthread_mutex_t *forks, c
 		philo[i].is_eating = 0;
 		philo[i].meals_eaten = 0;
 		philo[i].dead_philo = 0;
+		philo[i].all_ate = 0;
 		philo[i].start_time = ft_get_time();
 		philo[i].last_meal = ft_get_time();
 		philo[i].write_lock = &program->write_lock;
@@ -78,7 +80,8 @@ void	ft_init_program(t_program *program, t_philo *philo, int philo_num)
 	pthread_mutex_init(&program->meal_lock, NULL);
 }
 
-void	ft_init(t_philo *philo, t_program *program, pthread_mutex_t	*forks, char **argv)
+void	ft_init(t_philo *philo, t_program *program,
+			pthread_mutex_t	*forks, char **argv)
 {
 	ft_init_program(program, philo, ft_atoi(argv[1]));
 	ft_init_philo(philo, program, forks, argv);

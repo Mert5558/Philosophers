@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:57:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/11 12:46:44 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/11 15:55:30 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	*ft_routine(void *pointer)
 		if (ft_check_dead(philo) == 0)
 			ft_eat(philo);
 		if (ft_check_dead(philo) == 0)
+			ft_think(philo);
+		else if (philo->all_ate == 1)
 			ft_think(philo);
 		if (ft_check_dead(philo) == 0)
 			ft_sleep(philo);
