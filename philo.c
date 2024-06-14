@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 12:03:42 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/11 15:52:55 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/12 13:12:45 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char **argv)
 	if (ft_check_args(argc, argv) != 0)
 		return (1);
 	ft_init(philo, program, forks, argv);
-	ft_threads(philo, program);
+	ft_threads(philo, program, forks);
 	ft_destroy(philo, program, forks);
 	return (0);
 }

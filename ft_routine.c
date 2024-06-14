@@ -6,7 +6,7 @@
 /*   By: merdal <merdal@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/13 12:57:37 by merdal            #+#    #+#             */
-/*   Updated: 2024/06/11 15:55:30 by merdal           ###   ########.fr       */
+/*   Updated: 2024/06/12 13:08:24 by merdal           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_eat(t_philo *philo)
 			return ;
 	}
 	pthread_mutex_lock(philo->l_fork);
+	if (ft_check_dead(philo) == 1)
+		return ;
 	ft_print_status(philo, "has taken a fork");
 	philo->is_eating = 1;
 	ft_print_status(philo, "is eating");
