@@ -16,7 +16,7 @@ void	ft_thread_error(t_philo *philo, t_program *program,
 			pthread_mutex_t *forks)
 {
 	ft_destroy(philo, program, forks);
-	write(1, "Error thread\n", 22);
+	write(1, "Error thread\n", 13);
 }
 
 void	ft_threads(t_philo *philo, t_program *program, pthread_mutex_t *forks)

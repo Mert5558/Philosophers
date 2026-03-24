@@ -13,15 +13,15 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
 NAME = philo
-SRCS =	philo.c \
-		philo_utils.c \
-		ft_init.c \
-		ft_check_args.c \
-		ft_calloc.c \
-		ft_supervisor.c \
-		ft_threads.c \
-		ft_routine.c \
-		ft_destroy.c \
+SRCS =	src/philo.c \
+		src/philo_utils.c \
+		src/ft_init.c \
+		src/ft_check_args.c \
+		src/ft_calloc.c \
+		src/ft_supervisor.c \
+		src/ft_threads.c \
+		src/ft_routine.c \
+		src/ft_destroy.c \
 
 OBJS = $(SRCS:.c=.o)
 RM = rm -f
